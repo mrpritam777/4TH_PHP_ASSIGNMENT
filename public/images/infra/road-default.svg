@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="skyR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d1fae5"/>
+      <stop offset="1" stop-color="#6ee7b7"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#skyR)"/>
+  <circle cx="650" cy="90" r="40" fill="#fef08a"/>
+  <!-- hills -->
+  <path d="M0 300 Q200 220 400 290 T800 270 V500 H0 Z" fill="#34d399" opacity="0.5"/>
+  <path d="M0 340 Q250 270 500 330 T800 320 V500 H0 Z" fill="#10b981" opacity="0.55"/>
+  <!-- road -->
+  <g>
+    <path d="M320 500 L380 260 L420 260 L480 500 Z" fill="#475569"/>
+    <path d="M398 500 L400 260 L402 260 L402 500 Z" fill="#f8fafc"/>
+    <g stroke="#f8fafc" stroke-width="8" stroke-dasharray="34 30">
+      <line x1="400" y1="470" x2="400" y2="270"/>
+    </g>
+    <g fill="#f59e0b">
+      <rect x="300" y="430" width="14" height="40" rx="4"/>
+      <rect x="486" y="430" width="14" height="40" rx="4"/>
+    </g>
+  </g>
+  <!-- trees -->
+  <g fill="#065f46">
+    <circle cx="150" cy="330" r="34"/>
+    <circle cx="220" cy="350" r="26"/>
+    <circle cx="620" cy="340" r="30"/>
+    <circle cx="700" cy="360" r="24"/>
+  </g>
+  <g fill="#047857">
+    <rect x="145" y="352" width="10" height="30"/>
+    <rect x="216" y="368" width="8" height="24"/>
+    <rect x="616" y="358" width="9" height="26"/>
+    <rect x="696" y="376" width="8" height="22"/>
+  </g>
+</svg>
