@@ -33,7 +33,7 @@ class ReportIssueController extends Controller
             'request_number' => $requestNumber,
             'infrastructure_id' => $infrastructure->id,
             'title' => $data['title'],
-            'description' => $data['description'] . ($data['location'] ? "\n\nReported location: {$data['location']}" : ''),
+            'description' => $data['description'] . (($data['location'] ?? null) ? "\n\nReported location: {$data['location']}" : ''),
             'priority' => 'medium',
             'status' => 'pending',
             'before_image' => $request->hasFile('image') ? $request->file('image')->store('maintenance/before', 'public') : null,
@@ -49,8 +49,21 @@ class ReportIssueController extends Controller
         ]);
 
         return redirect()
-            ->route('public.track', $requestNumber)
-            ->with('success', 'Your issue has been submitted successfully.');
+            ->route('public.report.success', $requestNumber)
+            ->with('success', "Your issue has been submitted successfully. Keep your tracking code {$requestNumber} to check its status anytime.");
+    }
+
+    public function confirmation(string $requestNumber): View
+    {
+        $requestNumber = strtoupper(trim($requestNumber));
+
+        $request = MaintenanceRequest::where('request_number', $requestNumber)
+            ->with(['infrastructure.type'])
+            ->first();
+
+        abort_if(! $request, 404, 'No report found with that tracking code. Please check and try again.');
+
+        return view('public.report-success', compact('request'));
     }
 
     protected function generateRequestNumber(string $slug): string

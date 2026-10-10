@@ -23,6 +23,7 @@ Route::get('/infrastructure', [PublicSite\InfrastructureDirectoryController::cla
 Route::get('/bridge/{bridge}', [PublicSite\BridgeShowController::class, 'show'])->name('public.bridge');
 Route::get('/report-issue', [PublicSite\ReportIssueController::class, 'create'])->name('public.report.create');
 Route::post('/report-issue', [PublicSite\ReportIssueController::class, 'store'])->name('public.report.store');
+Route::get('/report-issue/confirmation/{requestNumber}', [PublicSite\ReportIssueController::class, 'confirmation'])->name('public.report.success');
 Route::get('/track', [PublicSite\TrackController::class, 'index'])->name('public.track');
 Route::get('/track/{requestNumber}', [PublicSite\TrackController::class, 'show'])->name('public.track.show');
 

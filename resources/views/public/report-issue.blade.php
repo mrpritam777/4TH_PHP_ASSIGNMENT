@@ -7,6 +7,7 @@
     </x-page-header>
 
     <form method="POST" action="{{ route('public.report.store') }}" data-bc-loading>
+        @csrf
         <div class="bc-form-section">
             <div class="bc-form-section-header">
                 <i class="bi bi-exclamation-triangle"></i>
@@ -36,12 +37,13 @@
                     </div>
                     <div class="col-12">
                         <label class="bc-form-label">Problem Title <span class="req">*</span></label>
-                        <input type="text" name="title" class="bc-input @error('title') is-invalid @enderror" placeholder="e.g. Pothole on northbound lane" required>
-                        @error('title') <div class="text-danger" style="font-size:12px;margin-top:4px;>{{ $message }}</div> @enderror
+                        <input type="text" name="title" class="bc-input @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="e.g. Pothole on northbound lane" required>
+                        @error('title') <div class="text-danger" style="font-size:12px;margin-top:4px;">{{ $message }}</div> @enderror
                     </div>
                     <div class="col-12">
-                        <label class="bc-form-label">Problem Description</label>
-                        <textarea name="description" class="bc-textarea" placeholder="Describe the issue, its location, and any safety concerns..." rows="4"></textarea>
+                        <label class="bc-form-label">Problem Description <span class="req">*</span></label>
+                        <textarea name="description" class="bc-textarea @error('description') is-invalid @enderror" placeholder="Describe the issue, its location, and any safety concerns..." rows="4" required>{{ old('description') }}</textarea>
+                        @error('description') <div class="text-danger" style="font-size:12px;margin-top:4px;">{{ $message }}</div> @enderror
                     </div>
                     <div class="col-md-6">
                         <label class="bc-form-label">Location (optional)</label>
@@ -58,13 +60,13 @@
                             <div class="col-md-6">
                                 <label class="bc-form-label">Email <span class="req">*</span></label>
                                 <input type="email" name="email" class="bc-input @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
-                                @error('email') <div class="text-danger" style="font-size:12px;margin-top:4px;>{{ $message }}</div> @enderror
+                                @error('email') <div class="text-danger" style="font-size:12px;margin-top:4px;">{{ $message }}</div> @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label class="bc-form-label">Phone Number</label>
                             <input type="text" name="phone" class="bc-input @error('phone') is-invalid @enderror" value="{{ old('phone') }}" placeholder="+91 98765 43210">
-                            @error('phone') <div class="text-danger" style="font-size:12px;margin-top:4px;>{{ $message }}</div> @enderror
+                            @error('phone') <div class="text-danger" style="font-size:12px;margin-top:4px;">{{ $message }}</div> @enderror
                         </div>
                     </div>
                 </div>
@@ -103,6 +105,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             var typeSelect = document.querySelector('select[name="infrastructure_type"]');
             var infraSelect = document.querySelector('select[name="infrastructure_id"]');
+            var previousInfraId = @json(old('infrastructure_id'));
 
             if (!typeSelect || !infraSelect) return;
 
@@ -124,6 +127,11 @@
                             opt.textContent = infra.name + ' (' + infra.code + ')';
                             infraSelect.appendChild(opt);
                         });
+                        // Restore the previously submitted selection after a validation redirect.
+                        if (previousInfraId) {
+                            infraSelect.value = String(previousInfraId);
+                            previousInfraId = null;
+                        }
                     })
                     .catch(() => {
                         infraSelect.innerHTML = '<option value="">Error loading list</option>';
