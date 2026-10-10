@@ -20,10 +20,6 @@
     <aside class="bc-sidebar" id="bcSidebar">
         <div class="bc-brand">
             <x-logo imgClass="bc-logo-img-lg" />
-            <!-- <div class="bc-brand-text">
-                <strong>BridgeCare</strong>
-                <small>Infra Authority</small>
-            </div> -->
         </div>
 
         <nav class="bc-sidebar-nav">

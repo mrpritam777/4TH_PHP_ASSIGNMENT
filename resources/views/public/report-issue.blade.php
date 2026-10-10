@@ -114,7 +114,7 @@
                 }
 
                 infraSelect.innerHTML = '<option value="">Loading...</option>';
-                fetch('/public/infrastructure/ajax?type=' + encodeURIComponent(type))
+                fetch('/infrastructure/ajax?type=' + encodeURIComponent(type))
                     .then(r => r.json())
                     .then(data => {
                         infraSelect.innerHTML = '<option value="">Select infrastructure...</option>';

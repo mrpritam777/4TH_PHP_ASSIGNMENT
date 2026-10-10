@@ -39,21 +39,45 @@
 
 * { box-sizing: border-box; }
 
-/* BridgeCare logo image (used everywhere via x-logo component) */
+/* BridgeCare logo image (used everywhere via the x-logo component).
+   Stacked lockup (~1.49:1) — height drives the size, width follows the
+   aspect ratio automatically. Never force it into fixed square boxes. */
 .bc-logo-img {
-    width: 42px; height: 42px;
-    border-radius: 12px;
+    display: block;
+    width: auto;
+    height: 64px;
     object-fit: contain;
-    background: #fff;
-    padding: 4px;
-    box-shadow: 0 4px 14px rgba(37, 99, 235, .4);
+    object-position: center;
     flex-shrink: 0;
 }
-.bc-pub-logo .bc-logo-img { width: 50px; height: 50px; border-radius: 12px; box-shadow: none; border: 1px solid var(--bc-border); }
-.bc-sidebar .bc-logo-img-lg { width: 150px; height: 48px; object-fit: contain; object-position: left center; background: #fff; border-radius: 10px; padding: 4px 10px; box-shadow: none; }
-body.sidebar-collapsed .bc-sidebar .bc-logo-img-lg { width: 44px; height: 44px; object-position: center; padding: 4px; }
-.bc-login-left .bc-logo-img { width: 120px; height: auto; max-height: 110px; background: #fff; border-radius: 18px; padding: 8px 14px; margin-bottom: 26px; box-shadow: 0 8px 24px rgba(0,0,0,.35); }
-.bc-login-card .bc-logo-img { width: 150px; height: auto; max-height: 90px; padding: 4px 8px; box-shadow: none; border: 1px solid var(--bc-border); margin-bottom: 18px; }
+
+/* Admin / contractor / staff sidebar — white brand chip so the dark logo reads on the navy panel */
+.bc-sidebar .bc-logo-img-lg {
+    height: 46px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 7px 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .18);
+}
+body.sidebar-collapsed .bc-brand { justify-content: center; padding: 18px 16px; }
+body.sidebar-collapsed .bc-sidebar .bc-logo-img-lg {
+    width: 40px; height: 40px;
+    padding: 4px;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+/* Login page — prominent brand badge on the dark panel, clean borderless logo on the card */
+.bc-login-left .bc-logo-img {
+    height: 80px;
+    align-self: flex-start;
+    background: #fff;
+    border-radius: 16px;
+    padding: 14px 20px;
+    margin-bottom: 26px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+.bc-login-card .bc-logo-img { height: 76px; margin-bottom: 18px; }
 
 html { scroll-behavior: smooth; }
 
@@ -1062,15 +1086,13 @@ body.sidebar-collapsed .bc-main { margin-left: var(--bc-sidebar-w-collapsed); }
 /* ============ Public site ============ */
 .bc-pub-nav {
     position: sticky; top: 0; z-index: 1030;
-    /* background: rgba(255,255,255,.95); */
+    background: rgba(255, 255, 255, .92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--bc-border);
 }
 .bc-pub-nav .container { display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 72px; }
 .bc-pub-logo { display: flex; align-items: center; gap: 11px; flex-shrink: 0; }
-.bc-pub-logo .bc-brand-icon { width: 100px; height: 100px; font-size: 100px; border-radius: 11px; }
-.bc-pub-logo strong { font-size: 18px; color: var(--bc-navy-800); font-weight: 800; line-height: 1.1; display: block; }
-.bc-pub-logo small { display: block; font-size: 10px; color: var(--bc-text-muted); letter-spacing: 1px; text-transform: uppercase; }
+.bc-pub-logo .bc-brand-icon { width: 46px; height: 46px; font-size: 22px; border-radius: 12px; }
 .bc-pub-nav-links { display: flex; align-items: center; gap: 4px; }
 .bc-pub-nav-links a {
     color: var(--bc-text-muted);
@@ -1467,6 +1489,7 @@ body.sidebar-collapsed .bc-main { margin-left: var(--bc-sidebar-w-collapsed); }
     .bc-pub-nav-links a { padding: 12px 14px; }
     .bc-pub-nav-links a.bc-pub-login { justify-content: center; }
     .bc-pub-nav-links a.bc-pub-cta { justify-content: center; }
+    .bc-pub-logo .bc-logo-img { height: 54px; }
 }
 
 @media (max-width: 575.98px) {
@@ -1483,6 +1506,8 @@ body.sidebar-collapsed .bc-main { margin-left: var(--bc-sidebar-w-collapsed); }
     .bc-cta-band { margin-top: 52px; }
     .bc-cta-band .container { padding: 42px 12px; }
     .bc-cta-band h2 { font-size: 22px; }
+    .bc-pub-logo .bc-logo-img { height: 44px; }
+    .bc-login-card .bc-logo-img { height: 60px; }
 }
 
 /* ============ Tabs ============ */

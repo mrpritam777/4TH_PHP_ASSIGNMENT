@@ -62,12 +62,18 @@ class InfrastructureSeeder extends Seeder
             ],
         ];
 
+        $bridgeImages = [
+            'Howrah Bridge' => '/assets/images/howrahBridge.jpg',
+            'Pamban Bridge' => '/assets/images/pambanBridges.jfif',
+            'Bandra-Worli Sea Link' => '/assets/images/Bandra-WorliSea.png',
+        ];
+
         foreach ($bridges as $data) {
             $bridge = Infrastructure::create([
                 ...$data,
                 'type_id' => $bridgeType->id,
                 'created_by' => $adminId,
-                'image' => 'infra/bridge-default.svg',
+                'image' => $bridgeImages[$data['name']] ?? '/assets/images/bridge-default.svg',
             ]);
 
             BridgeDetails::create([
@@ -113,12 +119,18 @@ class InfrastructureSeeder extends Seeder
             ],
         ];
 
+        $roadImages = [
+            'NH-48 (Delhi-Mumbai Corridor)' => '/assets/images/NationalHighway48.jfif',
+            'Coastal Highway (Mumbai-Goa)' => '/assets/images/coastal-highway-road.JPG',
+            'Golden Quadrilateral (NH-19)' => '/assets/images/NationalHighway48.jfif',
+        ];
+
         foreach ($roads as $data) {
             $road = Infrastructure::create([
                 ...$data,
                 'type_id' => $roadType->id,
                 'created_by' => $adminId,
-                'image' => 'infra/road-default.svg',
+                'image' => $roadImages[$data['name']] ?? '/assets/images/road-default.svg',
             ]);
 
             RoadDetails::create([
@@ -154,12 +166,17 @@ class InfrastructureSeeder extends Seeder
             ],
         ];
 
+        $buildingImages = [
+            'Vidhana Soudha' => '/assets/images/VidhanaSoudha.png',
+            'Secretariat Building' => '/assets/images/SecretariatBuilding.jpg',
+        ];
+
         foreach ($buildings as $data) {
             $building = Infrastructure::create([
                 ...$data,
                 'type_id' => $buildingType->id,
                 'created_by' => $adminId,
-                'image' => 'infra/building-default.svg',
+                'image' => $buildingImages[$data['name']] ?? '/assets/images/building-default.svg',
             ]);
 
             BuildingDetails::create([
@@ -193,12 +210,17 @@ class InfrastructureSeeder extends Seeder
             ],
         ];
 
+        $hospitalImages = [
+            'All India Institute of Medical Sciences' => '/assets/images/AllMS.PNG',
+            'Apollo Hospital' => '/assets/images/apollo-hospitals.webp',
+        ];
+
         foreach ($hospitals as $data) {
             $hospital = Infrastructure::create([
                 ...$data,
                 'type_id' => $hospitalType->id,
                 'created_by' => $adminId,
-                'image' => 'infra/hospital-default.svg',
+                'image' => $hospitalImages[$data['name']] ?? '/assets/images/hospital-default.svg',
             ]);
 
             HospitalDetails::create([
